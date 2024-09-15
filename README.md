@@ -1,5 +1,7 @@
 # NestJS GraphQL Boilerplate
 
+[![Tests](https://github.com/hmake98/nestjs-graphql-starter/actions/workflows/tests.yml/badge.svg)](https://github.com/hmake98/nestjs-graphql-starter/actions/workflows/main.yml)
+
 ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
 ![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
