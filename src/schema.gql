@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  user: UserResponse!
+}
+
+input AwsPresignInput {
+  fileClass: FileClass!
+  fileNameWithExtension: String!
+}
+
+type AwsPresignPutResponse {
+  expirey: Float!
+  url: String!
+}
+
+"""Date custom scalar type"""
+scalar DateTime
+
+"""File class to be stored in S3 bucket."""
+enum FileClass {
+  USER_PROFILE
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  getPresignUrlForPut(presignInput: AwsPresignInput!): AwsPresignPutResponse!
+  login(loginInput: LoginInput!): AuthResponse!
+  signup(signupInput: SignupInput!): AuthResponse!
+}
+
+type Query {
+  me: UserResponse!
+  ping: String!
+}
+
+input SignupInput {
+  email: String!
+  firstName: String
+  lastName: String
+  password: String!
+}
+
+type UserResponse {
+  avatar: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  email: String!
+  firstName: String
+  id: String!
+  lastName: String
+  role: String!
+  updatedAt: DateTime!
+}

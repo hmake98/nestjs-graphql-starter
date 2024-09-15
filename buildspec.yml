@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+    pre_build:
+        commands:
+            - echo Logging in to Amazon ECR...
+            - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+            - BRANCH_NAME=$(echo $CODEBUILD_WEBHOOK_HEAD_REF | cut -d'/' -f 3)
+            - ENV_TAG=${BRANCH_NAME:-latest}
+    build:
+        commands:
+            - echo Build started on `date`
+            - echo Building the Docker image...
+            - echo $BASE_IMAGE
+            - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+            - IMAGE_TAG=${COMMIT_HASH:=latest}
+            - echo $COMMIT_HASH
+            - echo $IMAGE_TAG
+            - echo $ENV_TAG
+            - echo $REPOSITORY_URI
+            - docker build -f ci/Dockerfile -t $REPOSITORY_URI:latest .
+            - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+            - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$ENV_TAG
+
+    post_build:
+        commands:
+            - echo Build completed on `date`
+            - echo Pushing the Docker images...
+            - docker push $REPOSITORY_URI:latest
+            - docker push $REPOSITORY_URI:$IMAGE_TAG
+            - docker push $REPOSITORY_URI:$ENV_TAG
+            - printf '[{"name":"%s","imageUri":"%s"}]' "$CONTAINER_NAME" "$REPOSITORY_URI:$ENV_TAG" > imagedefinitions.json
+
+artifacts:
+    files:
+        - imagedefinitions.json

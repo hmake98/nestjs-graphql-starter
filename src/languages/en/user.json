@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "alreadyExists": "Registration failed: An account with this email address already exists. Please use a different email or try logging in.",
+        "notFound": "Account not found: We couldn't find an account matching the provided details. Please check your information and try again."
+    }
+}
