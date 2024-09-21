@@ -11,6 +11,8 @@ import { CoreModule } from 'src/core/core.module';
 import { DatabaseModule } from 'src/database/database.module';
 import { UserModule } from 'src/modules/user/user.module';
 
+import * as resolvers from '../app/graphql/resolvers';
+import * as scalars from '../app/graphql/scalars';
 import { AppController } from './app.controller';
 
 @Module({
@@ -39,5 +41,6 @@ import { AppController } from './app.controller';
         CommonModule,
         UserModule,
     ],
+    providers: [...Object.values(resolvers), ...Object.values(scalars)],
 })
 export class AppModule {}

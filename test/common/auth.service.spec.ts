@@ -100,7 +100,7 @@ describe('AuthService', () => {
             mockPrismaService.user.findUnique.mockResolvedValue({ id: '123' });
 
             await expect(authService.signup(signupInput)).rejects.toThrow(
-                new NotFoundException('user.errors.userExists')
+                new NotFoundException('user.errors.alreadyExists')
             );
         });
 

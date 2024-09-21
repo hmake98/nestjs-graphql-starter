@@ -9,7 +9,7 @@ export class UserResponse implements User {
     @Field()
     email: string;
 
-    @Field()
+    @Field({ nullable: true })
     avatar: string;
 
     @Field({ nullable: true })

@@ -5,6 +5,7 @@ import {
     Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { GqlExecutionContext } from '@nestjs/graphql';
 import { Role } from '@prisma/client';
 
 @Injectable()
@@ -19,7 +20,9 @@ export class RolesGuard implements CanActivate {
         if (!requiredRoles) {
             return true;
         }
-        const { user } = context.switchToHttp().getRequest();
+
+        const ctx = GqlExecutionContext.create(context);
+        const user = ctx.getContext().req.user;
 
         if (!user || !user.role) {
             throw new ForbiddenException('auth.errors.unauthorized');

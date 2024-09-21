@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
-import { FileClass } from 'src/core/graphql/enums/file.class.enum';
+import { FileStorageClass } from 'src/app/graphql/enums';
 
 @InputType()
 export class AwsPresignInput {
@@ -8,7 +8,7 @@ export class AwsPresignInput {
     @IsNotEmpty()
     fileNameWithExtension: string;
 
-    @Field(() => FileClass)
+    @Field(() => FileStorageClass)
     @IsNotEmpty()
-    fileClass: FileClass;
+    fileClass: FileStorageClass;
 }

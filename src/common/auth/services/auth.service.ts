@@ -63,7 +63,7 @@ export class AuthService implements IAuthService {
             });
 
             if (findUser) {
-                throw new NotFoundException('user.errors.userExists');
+                throw new NotFoundException('user.errors.alreadyExists');
             }
 
             const hashPassword =
