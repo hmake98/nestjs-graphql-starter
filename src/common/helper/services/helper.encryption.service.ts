@@ -4,10 +4,10 @@ import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 import { IAuthUser } from 'src/common/auth/interfaces/auth.interface';
 
-import { IEncryptionService } from '../interfaces/enceryption.service.interface';
+import { IHelperEncryptionService } from '../interfaces/helper.enceryption.service.interface';
 
 @Injectable()
-export class EncryptionService implements IEncryptionService {
+export class HelperEncryptionService implements IHelperEncryptionService {
     private readonly accessTokenSecret: string;
     private readonly accessTokenExpire: string;
     constructor(

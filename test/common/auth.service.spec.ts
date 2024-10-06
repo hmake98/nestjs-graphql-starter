@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LoginInput } from 'src/common/auth/dtos/login.input';
 import { SignupInput } from 'src/common/auth/dtos/signup.input';
 import { AuthService } from 'src/common/auth/services/auth.service';
-import { EncryptionService } from 'src/common/helper/services/encryption.service';
+import { HelperEncryptionService } from 'src/common/helper/services/helper.encryption.service';
 import { PrismaService } from 'src/database/services/prisma.service';
 
 describe('AuthService', () => {
@@ -27,7 +27,10 @@ describe('AuthService', () => {
             providers: [
                 AuthService,
                 { provide: PrismaService, useValue: mockPrismaService },
-                { provide: EncryptionService, useValue: mockEncryptionService },
+                {
+                    provide: HelperEncryptionService,
+                    useValue: mockEncryptionService,
+                },
             ],
         }).compile();
 

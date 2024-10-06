@@ -3,7 +3,7 @@ import {
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
-import { EncryptionService } from 'src/common/helper/services/encryption.service';
+import { HelperEncryptionService } from 'src/common/helper/services/helper.encryption.service';
 import { PrismaService } from 'src/database/services/prisma.service';
 
 import { AuthResponse } from '../dtos/auth.response';
@@ -15,7 +15,7 @@ import { IAuthService } from '../interfaces/auth.service.interface';
 export class AuthService implements IAuthService {
     constructor(
         private readonly prismaService: PrismaService,
-        private readonly helperEncryptionService: EncryptionService
+        private readonly helperEncryptionService: HelperEncryptionService
     ) {}
 
     async login(data: LoginInput): Promise<AuthResponse> {

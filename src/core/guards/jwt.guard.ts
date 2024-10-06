@@ -32,9 +32,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     handleRequest(
         err: any,
         user: any,
-        info: any,
+        _info: any,
         context: ExecutionContext,
-        status?: any
+        _status?: any
     ) {
         const request = this.getRequest(context);
         const authorization = request.headers['authorization'];

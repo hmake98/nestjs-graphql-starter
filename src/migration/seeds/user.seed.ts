@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Command } from 'nestjs-command';
-import { EncryptionService } from 'src/common/helper/services/encryption.service';
+import { HelperEncryptionService } from 'src/common/helper/services/helper.encryption.service';
 import { PrismaService } from 'src/database/services/prisma.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class UserSeed {
     constructor(
         private readonly configService: ConfigService,
         private readonly prismaService: PrismaService,
-        private readonly helperEncryptionService: EncryptionService
+        private readonly helperEncryptionService: HelperEncryptionService
     ) {}
 
     private getAdminEmail(): string {

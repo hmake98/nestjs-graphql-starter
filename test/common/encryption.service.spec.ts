@@ -3,12 +3,12 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as argon2 from 'argon2';
 import { IAuthUser } from 'src/common/auth/interfaces/auth.interface';
-import { EncryptionService } from 'src/common/helper/services/encryption.service';
+import { HelperEncryptionService } from 'src/common/helper/services/helper.encryption.service';
 
 jest.mock('argon2');
 
 describe('EncryptionService', () => {
-    let service: EncryptionService;
+    let service: HelperEncryptionService;
     let jwtService: JwtService;
 
     const mockConfigService = {
@@ -22,13 +22,13 @@ describe('EncryptionService', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                EncryptionService,
+                HelperEncryptionService,
                 { provide: ConfigService, useValue: mockConfigService },
                 { provide: JwtService, useValue: mockJwtService },
             ],
         }).compile();
 
-        service = module.get<EncryptionService>(EncryptionService);
+        service = module.get<HelperEncryptionService>(HelperEncryptionService);
         jwtService = module.get<JwtService>(JwtService);
 
         mockConfigService.get.mockImplementation((key: string) => {

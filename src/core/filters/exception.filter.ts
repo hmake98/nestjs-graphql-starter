@@ -25,7 +25,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
                     typeof exceptionResponse === 'object' &&
                     exceptionResponse !== null
                 ) {
-                    // Handle structured BadRequestException (usually from class-validator)
                     const translatedResponse =
                         await this.translateStructuredResponse(
                             exceptionResponse,
@@ -33,7 +32,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
                         );
                     return new BadRequestException(translatedResponse);
                 } else {
-                    // Handle simple string message BadRequestException
                     const message = await this.i18nService.translate(
                         exception.message,
                         { lang }
@@ -41,7 +39,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
                     return new BadRequestException(message);
                 }
             } else {
-                // Handle other HttpExceptions
                 const message = await this.i18nService.translate(
                     exception.message,
                     { lang }
@@ -50,7 +47,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
             }
         }
 
-        // For non-HttpExceptions, return the original exception
         return exception;
     }
 

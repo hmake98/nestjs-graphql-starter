@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
-import { EncryptionService } from './services/encryption.service';
+import { HelperEncryptionService } from './services/helper.encryption.service';
 
 @Module({
     imports: [
@@ -19,7 +19,7 @@ import { EncryptionService } from './services/encryption.service';
             inject: [ConfigService],
         }),
     ],
-    providers: [EncryptionService],
-    exports: [EncryptionService],
+    providers: [HelperEncryptionService],
+    exports: [HelperEncryptionService],
 })
 export class HelperModule {}
